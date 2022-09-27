@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Threading;
 using BASAC.Util;
 
@@ -9,7 +10,7 @@ namespace BASAC.ActionAutomation
         private static ActionAutomationService _instance;
         private static readonly object Lock = new object();
         Thread tANU;
-
+        ConcurrentQueue<int> ActionAutomationQ;
         public static ActionAutomationService Instance
         {
             get
@@ -31,28 +32,12 @@ namespace BASAC.ActionAutomation
                     while (true)
                     {
                         Thread.Sleep(100);
-                        /*if (_AutomationNodesUpdateQueue.Count > 0)
+                        foreach (var item in ActionAutomationQ)
                         {
-                            ANqueueLock = true;
-                            _UpdateQueue.Clear();
-                            _UpdateQueueAL.Clear();
-                            foreach (var item in _AutomationNodesUpdateQueue)
-                            {
-                                _UpdateQueue.Add(item);
-                            }
-                            foreach (var item in _AutomationNodesUpdateQueueAL)
-                            {
-                                _UpdateQueueAL.Add(item);
-                            }
-                            _AutomationNodesUpdateQueue.Clear();
-                            _AutomationNodesUpdateQueueAL.Clear();
-                            ANqueueLock = false;
-                            _UpdateQueue = _UpdateQueue.Distinct().ToList();
-                            foreach (var item in _UpdateQueue)
-                            {
-                                UpdateANstate2(item, "", "", "", _UpdateQueueAL);
-                            }
-                        }*/
+
+                        }
+                        //UpdateAAstate();
+
                     }
                 });
             tANU.Start();
