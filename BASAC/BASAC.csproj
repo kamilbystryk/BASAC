@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{80ACAD7C-DF1A-4193-9751-1781DC523D94}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>BASAC</RootNamespace>
+    <AssemblyName>BASAC</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExternalConsole>true</ExternalConsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExternalConsole>true</ExternalConsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="M2Mqtt.Net">
+      <HintPath>..\packages\M2Mqtt.4.3.0.0\lib\net45\M2Mqtt.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Data.Sqlite" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\Log.cs" />
+    <Compile Include="Util\EnhancedSerialPort.cs" />
+    <Compile Include="Util\Utils.cs" />
+    <Compile Include="Util\ExceptionFileWriter.cs" />
+    <Compile Include="ActionAutomation\ActionAutomationService.cs" />
+    <Compile Include="Controller.cs" />
+    <Compile Include="Database\IotDevicesDataBase.cs" />
+    <Compile Include="Database\IotDevicesDataBaseModifier.cs" />
+    <Compile Include="MQTT\MQTTenum.cs" />
+    <Compile Include="Devices\DeviceLocal.cs" />
+    <Compile Include="Devices\IoTDevice.cs" />
+    <Compile Include="Devices\IoTregister.cs" />
+    <Compile Include="Devices\SupplyEnumeration.cs" />
+    <Compile Include="Preferences\Preferences.cs" />
+    <Compile Include="MQTT\CloudMQTTClient.cs" />
+    <Compile Include="Devices\DeviceTimer.cs" />
+    <Compile Include="Devices\DeviceHelper.cs" />
+    <Compile Include="Database\EventDataBase.cs" />
+    <Compile Include="Database\EventEnum.cs" />
+    <Compile Include="Database\EventDataBaseModifier.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Util\" />
+    <Folder Include="ActionAutomation\" />
+    <Folder Include="Database\" />
+    <Folder Include="MQTT\" />
+    <Folder Include="Devices\" />
+    <Folder Include="Preferences\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

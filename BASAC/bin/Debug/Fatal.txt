@@ -1,0 +1,18 @@
+BASAC ver.1.0.1.34468Time: 27.09.2022 19:10:00
+Error: Unhandled Exception
+System.Exception: CurrentDomainOnUnhandledException ---> Mono.Data.Sqlite.SqliteException: SQLite error
+no such table: Events
+  at Mono.Data.Sqlite.SQLite3.Prepare (Mono.Data.Sqlite.SqliteConnection cnn, System.String strSql, Mono.Data.Sqlite.SqliteStatement previous, System.UInt32 timeoutMS, System.String& strRemain) [0x001f8] in <132a2409ede24587885b92b7f48af81f>:0 
+  at Mono.Data.Sqlite.SqliteCommand.BuildNextCommand () [0x000d3] in <132a2409ede24587885b92b7f48af81f>:0 
+  at Mono.Data.Sqlite.SqliteCommand.GetStatement (System.Int32 index) [0x00008] in <132a2409ede24587885b92b7f48af81f>:0 
+  at (wrapper remoting-invoke-with-check) Mono.Data.Sqlite.SqliteCommand.GetStatement(int)
+  at Mono.Data.Sqlite.SqliteDataReader.NextResult () [0x000b3] in <132a2409ede24587885b92b7f48af81f>:0 
+  at Mono.Data.Sqlite.SqliteDataReader..ctor (Mono.Data.Sqlite.SqliteCommand cmd, System.Data.CommandBehavior behave) [0x0004e] in <132a2409ede24587885b92b7f48af81f>:0 
+  at (wrapper remoting-invoke-with-check) Mono.Data.Sqlite.SqliteDataReader..ctor(Mono.Data.Sqlite.SqliteCommand,System.Data.CommandBehavior)
+  at Mono.Data.Sqlite.SqliteCommand.ExecuteReader (System.Data.CommandBehavior behavior) [0x00006] in <132a2409ede24587885b92b7f48af81f>:0 
+  at Mono.Data.Sqlite.SqliteCommand.ExecuteNonQuery () [0x00000] in <132a2409ede24587885b92b7f48af81f>:0 
+  at BASAC.Database.EventDataBase.ExecuteNonQuery (Mono.Data.Sqlite.SqliteConnection connection, System.String sql) [0x00018] in /home/kamil/BAS_AC/BASAC/BASAC/Database/EventDataBase.cs:151 
+  at BASAC.Database.EventDataBase.AddEvent (System.Int32 type, System.String date, System.Int32 location, System.String value) [0x00094] in /home/kamil/BAS_AC/BASAC/BASAC/Database/EventDataBase.cs:81 
+  at BASAC.MainClass.Main (System.String[] args) [0x0009c] in /home/kamil/BAS_AC/BASAC/BASAC/Program.cs:100 
+   --- End of inner exception stack trace ---
+

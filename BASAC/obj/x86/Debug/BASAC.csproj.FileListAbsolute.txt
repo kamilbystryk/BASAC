@@ -1,0 +1,9 @@
+/home/kamil/BAS_AC/BASAC/BASAC/bin/Debug/BASAC.exe
+/home/kamil/BAS_AC/BASAC/BASAC/bin/Debug/BASAC.pdb
+/home/kamil/BAS_AC/BASAC/BASAC/bin/Debug/M2Mqtt.Net.dll
+/home/kamil/BAS_AC/BASAC/BASAC/bin/Debug/M2Mqtt.Net.pdb
+/home/kamil/BAS_AC/BASAC/BASAC/obj/x86/Debug/BASAC.csproj.CoreCompileInputs.cache
+/home/kamil/BAS_AC/BASAC/BASAC/obj/x86/Debug/BASAC.csproj.CopyComplete
+/home/kamil/BAS_AC/BASAC/BASAC/obj/x86/Debug/BASAC.exe
+/home/kamil/BAS_AC/BASAC/BASAC/obj/x86/Debug/BASAC.pdb
+/home/kamil/BAS_AC/BASAC/BASAC/obj/x86/Debug/BASAC.csproj.AssemblyReference.cache
