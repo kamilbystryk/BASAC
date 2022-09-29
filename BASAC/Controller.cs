@@ -1,8 +1,11 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using BASAC.Database;
 using BASAC.Devices;
+using BASAC.MQTT;
 
 namespace BASAC
 {
@@ -20,6 +23,7 @@ namespace BASAC
         List<IoTDevice> IotNewDevicesList;
 
         public event EventHandler<ReadyToSend> mReadyToSend;
+
         public event EventHandler<IotDeviceNotify> mIotDeviceNotify;
 
         public static Controller Instance
@@ -53,6 +57,30 @@ namespace BASAC
             }
 
             public ReadyToSend(String topic, byte[] message)
+            {
+                Topic = topic;
+                Message = message;
+            }
+        }
+
+        public class ReadyToReceive : EventArgs
+        {
+            private String _topic;
+            private byte[] _message;
+
+            public String Topic
+            {
+                get { return _topic; }
+                set { _topic = value; }
+            }
+
+            public byte[] Message
+            {
+                get { return _message; }
+                set { _message = value; }
+            }
+
+            public ReadyToReceive(String topic, byte[] message)
             {
                 Topic = topic;
                 Message = message;
@@ -135,6 +163,56 @@ namespace BASAC
         public void MqttIotDeviceNotify(String MAC, String obj, byte[] message, bool FromCloud)
         {
             //TODO obsługa zgloszeń z urządzeń
+            if (DeviceListConstains(MAC))
+            {
+                ResetDeviceTimeout(MAC);
+                if (!IotDeviceConnected(MAC))
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+            else if (!NewDeviceListConstains(MAC))
+            {
+                if (mReadyToSend != null)
+                {
+                    mReadyToSend.Invoke(this, new ReadyToSend(MQTTenum.IoTserviceTopic + "/" + MAC + "/down", Encoding.ASCII.GetBytes("GiveMeAllRegisters")));
+                }
+            }
+        }
+
+        private void ResetDeviceTimeout(string mAC)
+        {
+            foreach(var item in _DeviceTimer)
+            {
+                if (item.MAC.Equals(mAC))
+                {
+                    item.time = 0;
+                }
+            }
+        }
+
+        private bool IotDeviceConnected(string mAC)
+        {
+            bool ret = IotDevicesList.Any(x => (x.Online == true && x.MAC == mAC
+            && (x.Supply == SupplyEnumeration.Main12VDC || x.Supply == SupplyEnumeration.main230VAC || x.Supply == SupplyEnumeration.main230VAC)) 
+            || x.Supply == SupplyEnumeration.Battery);
+            return ret;
+        }
+
+        private bool DeviceListConstains(string mAC)
+        {
+            bool ret = IotDevicesList.Any(x => x.MAC == mAC);
+            return ret;
+        }
+
+        private bool NewDeviceListConstains(string mAC)
+        {
+            bool ret = IotNewDevicesList.Any(x => x.MAC == mAC);
+            return ret;
         }
 
 
