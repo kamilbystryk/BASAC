@@ -19,7 +19,7 @@ namespace BASAC.Devices
             return ret;
         }
 
-        public static bool MacExists(this List<IoTDevice> source, string Mac)
+        /*public static bool MacExists(this List<IoTDevice> source, string Mac)
         {
             bool ret = false;
             var listCopy = new List<IoTDevice>(source);
@@ -31,6 +31,6 @@ namespace BASAC.Devices
                 }
             }
             return ret;
-        }
+        }*/
     }
 }

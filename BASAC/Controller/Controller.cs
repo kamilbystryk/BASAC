@@ -101,11 +101,9 @@ namespace BASAC.Controller
             
         }
 
-
-
         internal bool AddDeviceToNewDeviceList(IoTDevice node)
         {
-            if (!IotNewDevicesList.MacExists(node.MAC))
+            if (!IotNewDevicesList.ContainsMac(node.MAC))
             {
                 IotNewDevicesList.Add(node);
                 return true;

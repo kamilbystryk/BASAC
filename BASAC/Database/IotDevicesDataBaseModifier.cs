@@ -17,6 +17,7 @@ namespace BASAC.Database
         Dev_value,
         Dev_acq,
         Dev_local,
+        Dev_room,
         Dev_devicetype,
         Dev_supply,
         Dev_CommCh,
@@ -59,6 +60,8 @@ namespace BASAC.Database
                     return "Acq";
                 case IotDevicesDataBaseModifierCode.Dev_local:
                     return "Dev_local";
+                case IotDevicesDataBaseModifierCode.Dev_room:
+                    return "Room";                    
                 case IotDevicesDataBaseModifierCode.Dev_supply:
                     return "Dev_supply";
                 case IotDevicesDataBaseModifierCode.Dev_value:

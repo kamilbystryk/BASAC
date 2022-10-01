@@ -11,6 +11,7 @@ namespace BASAC.Devices
         private bool _online = false;
         private List<IoTregister> _registers;
         private int _local;
+        private int _room;
         private String _deviceModel;
         private SupplyEnumeration _supply;
 
@@ -22,11 +23,12 @@ namespace BASAC.Devices
             this._online = false;
             this._registers = new List<IoTregister>();
             this._local = 0;
+            this._room = 0;
             this._deviceModel = "UNK";
             this._supply = 0;
         }
 
-        public IoTDevice(int Id, String MAC, int State, bool Online, List<IoTregister> Registers, int Localisation, DeviceType DeviceModel, 
+        public IoTDevice(int Id, String MAC, int State, bool Online, List<IoTregister> Registers, int Localisation, int Room, DeviceType DeviceModel, 
                 SupplyEnumeration Supply)
         {
             this._id = Id;
@@ -35,6 +37,7 @@ namespace BASAC.Devices
             this._online = Online;
             this._registers = Registers;
             this._local = Localisation;
+            this._room = Room;
             this._deviceModel = "DeviceModel";
             this._supply = Supply;
         }
@@ -72,6 +75,12 @@ namespace BASAC.Devices
         {
             get { return _local; }
             set { _local = value; }
+        }
+
+        public int Room
+        {
+            get { return _room; }
+            set { _room = value; }
         }
 
         public string DeviceModel

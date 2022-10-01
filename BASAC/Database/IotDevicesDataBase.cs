@@ -78,6 +78,7 @@ namespace BASAC.Database
                 + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.Dev_deleted) + " boolean, "
                 + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.Dev_acq) + " boolean, "
                 + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.Dev_local) + " int, "
+                + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.Dev_room) + " int, "
                 + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.Dev_devicetype) + " nvarchar(255), "
                 + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.Dev_supply) + " int, "
                 + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.Dev_CommCh) + " int"
@@ -141,7 +142,7 @@ namespace BASAC.Database
             {
                 if (item.Name.ToUpper().StartsWith("DEV"))
                 {
-                    IoTDevice temp = new IoTDevice(item.Id, item.MAC, 0, false, new List<IoTregister>(), item.Localisation, item.DeviceType, item.Supply);
+                    IoTDevice temp = new IoTDevice(item.Id, item.MAC, 0, false, new List<IoTregister>(), item.Localisation, item.Room, item.DeviceType, item.Supply);
                     List<IoTregister> tempo = new List<IoTregister>();
                     foreach (var items in oblist)
                     {
@@ -189,8 +190,8 @@ namespace BASAC.Database
                                     reader.GetString(4), reader.GetString(5), reader.GetString(6),
                                     ((reader.GetString(7) as string == "True") ? true : false), reader.GetString(8), 
                                     ((reader.GetString(9) as string == "True") ? true : false),
-                            reader.GetInt32(10), (BASAC.Devices.DeviceType)reader.GetInt32(11), (
-                                    BASAC.Devices.SupplyEnumeration)reader.GetInt32(12), (BASAC.Devices.ComChEnumeration)reader.GetInt32(13));
+                            reader.GetInt32(10), reader.GetInt32(11), (BASAC.Devices.DeviceType)reader.GetInt32(12), (
+                                    BASAC.Devices.SupplyEnumeration)reader.GetInt32(13), (BASAC.Devices.ComChEnumeration)reader.GetInt32(14));
                         }
                         reader.Close();
                     }

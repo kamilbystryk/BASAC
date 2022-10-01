@@ -13,6 +13,7 @@ namespace BASAC.Devices
         private string _Dev_value;
         private bool _Dev_acq;
         private int _Dev_local;
+        private int _Dev_room;
         private DeviceType _Dev_devicetype;
         private SupplyEnumeration _Dev_supply;
         private ComChEnumeration _Dev_CommCh;
@@ -28,14 +29,15 @@ namespace BASAC.Devices
             this._Dev_deleted = false;
             this._Dev_value = "";
             this._Dev_acq = false;
-            this._Dev_local = -1;
+            this._Dev_local = 0;
+            this._Dev_room = 0;
             this._Dev_devicetype = DeviceType.Unknown;
             this._Dev_supply = SupplyEnumeration.Unknown;
             this._Dev_CommCh = ComChEnumeration.Unknown;
         }
 
         public IoTregister(string MAC, int Id, int RegisterId, string Name, string Description, string CoilType, bool Deleted, 
-                string Value, bool Acquisition, int Localisation, DeviceType DeviceType, SupplyEnumeration Supply, ComChEnumeration CommunicationChannel)
+                string Value, bool Acquisition, int Localisation, int Room, DeviceType DeviceType, SupplyEnumeration Supply, ComChEnumeration CommunicationChannel)
         {
             this._Dev_MAC = MAC;
             this._Dev_ID = Id;
@@ -47,6 +49,7 @@ namespace BASAC.Devices
             this._Dev_value = Value;
             this._Dev_acq = Acquisition;
             this._Dev_local = Localisation;
+            this._Dev_room = Room;
             this._Dev_devicetype = DeviceType;
             this._Dev_supply = Supply;
             this._Dev_CommCh = CommunicationChannel;
@@ -110,6 +113,12 @@ namespace BASAC.Devices
         {
             get { return _Dev_local; }
             set { _Dev_local = value; }
+        }
+
+        public int Room
+        {
+            get { return _Dev_room; }
+            set { _Dev_room = value; }
         }
 
         public DeviceType DeviceType
