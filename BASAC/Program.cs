@@ -15,8 +15,10 @@ using BASAC.MQTT;
 using BASAC.Util;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
-using static BASAC.Controller;
+using BASAC.Controller;
 using static BASAC.Database.EventEnum;
+using static BASAC.Controller.Controller;
+//using static BASAC.Controller.Controller;
 
 namespace BASAC
 {
@@ -156,7 +158,7 @@ namespace BASAC
             {
                 Log.WriteLine("no", ConsoleColor.DarkYellow);
             }
-            Controller.Instance.mReadyToSend += mqttPublish;
+            Controller.Controller.Instance.mReadyToSend += mqttPublish;
 
             // konsola serwisowa
             if (Utils.ServiceConsole)
@@ -208,13 +210,13 @@ namespace BASAC
                 _nodesobj = _mac.Substring(18);
                 _mac = _mac.Substring(0, 17);
 
-                Controller.Instance.MqttIotDeviceNotify(_mac, _nodesobj, e.Message, false);
+                Controller.Controller.Instance.MqttIotDeviceNotify(_mac, _nodesobj, e.Message, false);
             }
             else if (_topic.StartsWith(MQTTenum.IoTserviceTopic+ "/up/"))
             {
                 _mac = _topic.Replace(MQTTenum.IoTserviceTopic +"/up/", "");
                 _mac = _mac.Substring(0, 17);
-                Controller.Instance.IotDeviceServiceEvent(_mac, e.Message, false);
+                Controller.Controller.Instance.IotDeviceServiceEvent(_mac, e.Message, false);
             }
             else
             {
@@ -268,7 +270,7 @@ namespace BASAC
                             }
                         }
                     }
-                    if (!Controller.Instance.NewIotDeviceMACexists(_mac) && !Controller.Instance.IotDeviceMACexists(_mac))
+                    if (!Controller.Controller.Instance.IotDevicesList.ContainsMac(_mac) && !Controller.Controller.Instance.IotNewDevicesList.ContainsMac(_mac))
                     {
                         var scanneddevice = new IoTDevice();
                         scanneddevice.ID = 0;
@@ -296,7 +298,7 @@ namespace BASAC
                         }
                         _registers[0].Name = "DEV";
                         scanneddevice.Registers = _registers;
-                        Controller.Instance.AddDeviceToNewDeviceList(scanneddevice);
+                        Controller.Controller.Instance.AddDeviceToNewDeviceList(scanneddevice);
                     }
                 }
                 Log.WriteLine("#");

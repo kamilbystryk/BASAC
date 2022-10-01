@@ -44,7 +44,6 @@
     <Compile Include="Util\Utils.cs" />
     <Compile Include="Util\ExceptionFileWriter.cs" />
     <Compile Include="ActionAutomation\ActionAutomationService.cs" />
-    <Compile Include="Controller.cs" />
     <Compile Include="Database\IotDevicesDataBase.cs" />
     <Compile Include="Database\IotDevicesDataBaseModifier.cs" />
     <Compile Include="MQTT\MQTTenum.cs" />
@@ -60,6 +59,11 @@
     <Compile Include="Database\EventEnum.cs" />
     <Compile Include="Database\EventDataBaseModifier.cs" />
     <Compile Include="Devices\IoTDeviceExtension.cs" />
+    <Compile Include="Devices\DeviceTimerExtension.cs" />
+    <Compile Include="Controller\IotDeviceNotify.cs" />
+    <Compile Include="Controller\Controller.cs" />
+    <Compile Include="Controller\ReadyToSend.cs" />
+    <Compile Include="Controller\ReadyToReceive.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -71,6 +75,7 @@
     <Folder Include="MQTT\" />
     <Folder Include="Devices\" />
     <Folder Include="Preferences\" />
+    <Folder Include="Controller\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
