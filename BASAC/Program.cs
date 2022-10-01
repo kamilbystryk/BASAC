@@ -210,9 +210,9 @@ namespace BASAC
 
                 Controller.Instance.MqttIotDeviceNotify(_mac, _nodesobj, e.Message, false);
             }
-            else if (_topic.StartsWith(MQTTenum.IoTserviceTopic+ "/uplink/"))
+            else if (_topic.StartsWith(MQTTenum.IoTserviceTopic+ "/up/"))
             {
-                _mac = _topic.Replace(MQTTenum.IoTserviceTopic +"/uplink/", "");
+                _mac = _topic.Replace(MQTTenum.IoTserviceTopic +"/up/", "");
                 _mac = _mac.Substring(0, 17);
                 Controller.Instance.IotDeviceServiceEvent(_mac, e.Message, false);
             }

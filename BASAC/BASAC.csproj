@@ -59,6 +59,7 @@
     <Compile Include="Database\EventDataBase.cs" />
     <Compile Include="Database\EventEnum.cs" />
     <Compile Include="Database\EventDataBaseModifier.cs" />
+    <Compile Include="Devices\IoTDeviceExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

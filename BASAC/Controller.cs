@@ -163,10 +163,11 @@ namespace BASAC
         public void MqttIotDeviceNotify(String MAC, String obj, byte[] message, bool FromCloud)
         {
             //TODO obsługa zgloszeń z urządzeń
-            if (DeviceListConstains(MAC))
+
+            if (IotDevicesList.ContainsMac(MAC))
             {
                 ResetDeviceTimeout(MAC);
-                if (!IotDeviceConnected(MAC))
+                if (!IotDevicesList.IsConnected(MAC))
                 {
 
                 }
@@ -175,7 +176,7 @@ namespace BASAC
 
                 }
             }
-            else if (!NewDeviceListConstains(MAC))
+            else if (!IotNewDevicesList.ContainsMac(MAC))
             {
                 if (mReadyToSend != null)
                 {
@@ -195,25 +196,11 @@ namespace BASAC
             }
         }
 
-        private bool IotDeviceConnected(string mAC)
-        {
-            bool ret = IotDevicesList.Any(x => (x.Online == true && x.MAC == mAC
-            && (x.Supply == SupplyEnumeration.Main12VDC || x.Supply == SupplyEnumeration.main230VAC || x.Supply == SupplyEnumeration.main230VAC)) 
-            || x.Supply == SupplyEnumeration.Battery);
-            return ret;
-        }
 
-        private bool DeviceListConstains(string mAC)
-        {
-            bool ret = IotDevicesList.Any(x => x.MAC == mAC);
-            return ret;
-        }
 
-        private bool NewDeviceListConstains(string mAC)
-        {
-            bool ret = IotNewDevicesList.Any(x => x.MAC == mAC);
-            return ret;
-        }
+
+
+
 
 
         public void IotDeviceServiceEvent(String MAC, byte[] message, bool FromCloud)
