@@ -80,7 +80,7 @@ namespace BASAC.Controller
                 _DeviceTimer.ResetDeviceTimeout(MAC);
                 if (!IotDevicesList.IsConnected(MAC))
                 {
-
+                    IotDevicesList.SetConnected(MAC, true);
                 }
                 else
                 {
@@ -90,8 +90,9 @@ namespace BASAC.Controller
             else if (!IotNewDevicesList.ContainsMac(MAC))
             {
                 if (mReadyToSend != null)
-                {
-                    mReadyToSend.Invoke(this, new ReadyToSend(MQTTenum.IoTserviceTopic + "/" + MAC + "/down", Encoding.ASCII.GetBytes("GiveMeAllRegisters")));
+                { 
+                    mReadyToSend.Invoke(this, 
+                        new ReadyToSend(MQTTenum.IoTserviceTopic + "/" + MAC + "/down", Encoding.ASCII.GetBytes(MQTTenum.MQTTCommanddGiveMeAllRegisters)));
                 }
             }
         }

@@ -19,18 +19,13 @@ namespace BASAC.Devices
             return ret;
         }
 
-        /*public static bool MacExists(this List<IoTDevice> source, string Mac)
+        public static void SetConnected(this List<IoTDevice> source, string Mac, bool ConnectionState)
+        {           
+            source.Where(o => o.MAC.Equals(Mac)).ToList().ForEach(f => f.Online = ConnectionState);
+        }
+        public static void SetConnected(this List<IoTDevice> source, string Mac)
         {
-            bool ret = false;
-            var listCopy = new List<IoTDevice>(source);
-            foreach (var item in listCopy)
-            {
-                if (item.MAC.Equals(Mac))
-                {
-                    ret = true;
-                }
-            }
-            return ret;
-        }*/
+            source.Where(o => o.MAC.Equals(Mac)).ToList().ForEach(f => f.Online = true);
+        }
     }
 }

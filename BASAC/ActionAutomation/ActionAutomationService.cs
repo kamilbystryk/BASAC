@@ -10,7 +10,7 @@ namespace BASAC.ActionAutomation
         private static ActionAutomationService _instance;
         private static readonly object Lock = new object();
         Thread tANU;
-        ConcurrentQueue<int> ActionAutomationQ;
+        ConcurrentQueue<int> ActionAutomationQ = new ConcurrentQueue<int>();
         public static ActionAutomationService Instance
         {
             get
