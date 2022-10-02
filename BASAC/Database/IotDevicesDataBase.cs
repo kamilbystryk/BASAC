@@ -81,7 +81,8 @@ namespace BASAC.Database
                 + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.Dev_room) + " int, "
                 + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.Dev_devicetype) + " nvarchar(255), "
                 + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.Dev_supply) + " int, "
-                + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.Dev_CommCh) + " int"
+                + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.Dev_CommCh) + " int, "
+                + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.Dev_LocalControl) + " boolean"
                 + ")";
             ExecuteNonQuery(connection, sqlins);
             sqlins = "CREATE INDEX " + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.Dev_ID) + " ON "
@@ -101,6 +102,16 @@ namespace BASAC.Database
 
             DBAddLocal(new DeviceLocal(0, "Home", "default"));
 
+
+            sqlins = "CREATE TABLE " + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.TableLoc2Nam)
+                + " ("
+                + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.TableRoom2NamId) + " int, "
+                + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.TableRoom2NamName) + " nvarchar(255), "
+                + IotDevicesDataBaseModifier.GetName(IotDevicesDataBaseModifierCode.TableRoom2NamDesc) + " nvarchar(255)"
+                + ")";
+            ExecuteNonQuery(connection, sqlins);
+
+            DBAddLocal(new DeviceLocal(0, "Default room", "default"));
         }
 
         private int DBAddLocal(DeviceLocal deviceLocal)
@@ -142,7 +153,7 @@ namespace BASAC.Database
             {
                 if (item.Name.ToUpper().StartsWith("DEV"))
                 {
-                    IoTDevice temp = new IoTDevice(item.Id, item.MAC, 0, false, new List<IoTregister>(), item.Localisation, item.Room, item.DeviceType, item.Supply);
+                    IoTDevice temp = new IoTDevice(item.Id, item.MAC, 0, false, new List<IoTregister>(), item.Localisation, item.Room, item.DeviceType, item.Supply, false);
                     List<IoTregister> tempo = new List<IoTregister>();
                     foreach (var items in oblist)
                     {

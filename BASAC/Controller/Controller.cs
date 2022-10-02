@@ -6,6 +6,8 @@ using System.Text;
 using BASAC.Database;
 using BASAC.Devices;
 using BASAC.MQTT;
+using BASAC.Util;
+
 
 namespace BASAC.Controller
 {
@@ -23,7 +25,7 @@ namespace BASAC.Controller
         public List<IoTDevice> IotNewDevicesList;
 
         public event EventHandler<ReadyToSend> mReadyToSend;
-
+        public event EventHandler<ReadyTosendCloud> mReadyToSendCloud;
         public event EventHandler<IotDeviceNotify> mIotDeviceNotify;
 
         public static Controller Instance
@@ -71,20 +73,38 @@ namespace BASAC.Controller
             }
         }
 
-        public void MqttIotDeviceNotify(String MAC, String obj, byte[] message, bool FromCloud)
+        public void MqttIotDeviceNotify(String MAC, String Register, byte[] message, bool FromCloud)
         {
-            //TODO obsługa zgloszeń z urządzeń
+            //TODO config and firmware messages
 
             if (IotDevicesList.ContainsMac(MAC))
             {
+
                 _DeviceTimer.ResetDeviceTimeout(MAC);
+                String _mess = Encoding.UTF8.GetString(message).RemoveCharFromString('\0');
+                if (Encoding.UTF8.GetString(message).StartsWith("@") && Register.StartsWith("OUT"))
+                {
+                    if (IotDevicesList.IsLocalControl(MAC, Register))
+                        _mess = _mess.Substring(1);
+                }
+
                 if (!IotDevicesList.IsConnected(MAC))
                 {
                     IotDevicesList.SetConnected(MAC, true);
                 }
                 else
                 {
-
+                    IoTDeviceExtension.UpdateObject(IotDevicesList, MAC, Register, _mess, FromCloud);
+                    if (!FromCloud)
+                    {
+                        if (mReadyToSendCloud != null)
+                            mReadyToSendCloud(this, new ReadyTosendCloud("nodeswifi/" + MAC + "/" + Register, message));
+                    }
+                    else
+                    {
+                        if (mReadyToSendCloud != null)
+                            mReadyToSendCloud(this, new ReadyTosendCloud("nodeswifi/" + MAC + "/" + Register, message));
+                    }
                 }
             }
             else if (!IotNewDevicesList.ContainsMac(MAC))

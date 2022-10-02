@@ -27,5 +27,15 @@ namespace BASAC.Devices
         {
             source.Where(o => o.MAC.Equals(Mac)).ToList().ForEach(f => f.Online = true);
         }
+
+        public static void UpdateObject(this List<IoTDevice> source, string Mac, string ObjectDesc, string Message, bool fromCloud)
+        {
+            //TODO
+        }
+
+        public static bool IsLocalControl(this List<IoTDevice> source, string Mac, string registerName)
+        {
+            return source.FirstOrDefault(o => o.MAC.Equals(Mac)).LocalControl;
+        }
     }
 }

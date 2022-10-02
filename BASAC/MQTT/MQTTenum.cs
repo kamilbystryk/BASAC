@@ -10,6 +10,9 @@ namespace BASAC.MQTT
 
         public static String MQTTCommanddGiveMeAllRegisters = "GiveMeAllRegisters";
 
+
+
+
         public MQTTenum()
         {
         }

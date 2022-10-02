@@ -21,11 +21,17 @@ namespace BASAC.Database
         Dev_devicetype,
         Dev_supply,
         Dev_CommCh,
+        Dev_LocalControl,
 
         TableLoc2Nam,
         TableLoc2NamId,
         TableLoc2NamName,
-        TableLoc2NamDesc
+        TableLoc2NamDesc,
+
+        TableRoom2Nam,
+        TableRoom2NamId,
+        TableRoom2NamName,
+        TableRoom2NamDesc
     }
 
 
@@ -70,6 +76,9 @@ namespace BASAC.Database
                     return "Dev_Type";
                 case IotDevicesDataBaseModifierCode.Dev_CommCh:
                     return "CommCh";
+                case IotDevicesDataBaseModifierCode.Dev_LocalControl:
+                    return "LocalControl";
+
                 case IotDevicesDataBaseModifierCode.TableLoc2Nam:
                     return "TableLoc2Nam";
                 case IotDevicesDataBaseModifierCode.TableLoc2NamId:
@@ -77,9 +86,16 @@ namespace BASAC.Database
                 case IotDevicesDataBaseModifierCode.TableLoc2NamName:
                     return "Name";
                 case IotDevicesDataBaseModifierCode.TableLoc2NamDesc:
-                    return "Desc"; 
+                    return "Desc";
 
-
+                case IotDevicesDataBaseModifierCode.TableRoom2Nam:
+                    return "TableRoom2Name";
+                case IotDevicesDataBaseModifierCode.TableRoom2NamId:
+                    return "ID";
+                case IotDevicesDataBaseModifierCode.TableRoom2NamName:
+                    return "Name";
+                case IotDevicesDataBaseModifierCode.TableRoom2NamDesc:
+                    return "Desc";
             }
 
         }
